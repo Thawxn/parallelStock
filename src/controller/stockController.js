@@ -2,8 +2,17 @@ const Stock = require('../models/Stock');
 
 class StockOneController {
 
+    // Buscando produto
     async index(req, res) {
-        res.send("Hello Word")
+        const { code } = req.params;
+
+        if(code !== undefined) {
+            await Stock.findAll({where: {code}}).then(data => {
+                res.json(data)
+            }).catch(() => {
+                res.json({err: 'Produto não encontrado'})
+            })
+        }
     }
 
     // Registro de produto
@@ -44,7 +53,25 @@ class StockOneController {
         }
     }
 
+    // Entrada de produto
     async entry(req, res) {
+        const { code } = req.params;
+        const { locale } = req.params;
+        const { unit_entry } = req.body;
+
+        if(code !== undefined){
+            await Stock.findOne({where: {code, locale}}).then(data => {
+                const unit = parseInt(data.unit) + parseInt(unit_entry)
+
+                Stock.update({unit}, {where: {code, locale}})
+
+                res.json(data)
+
+            }).catch(() => {
+                res.json({err: 'Produto não encontrado'})
+            })
+        }
+
     }
 }
 
