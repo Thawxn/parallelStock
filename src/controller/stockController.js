@@ -3,7 +3,7 @@ const Stock = require('../models/Stock');
 class StockOneController {
 
     // Buscando produto
-    async index(req, res) {
+    async search(req, res) {
         const { code } = req.params;
 
         if(code !== undefined) {
@@ -13,6 +13,15 @@ class StockOneController {
                 res.json({err: 'Produto não encontrado'})
             })
         }
+    }
+
+    // Buscando todos os produtos
+    async index(req, res) {
+        await Stock.findAll().then(data => {
+            res.json(data);
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     // Registro de produto
@@ -56,7 +65,7 @@ class StockOneController {
     // Entrada de produto
     async entry(req, res) {
         const { code } = req.params;
-        const { locale } = req.params;
+        const { locale } = req.body;
         const { unit_entry } = req.body;
 
         if(code !== undefined){
@@ -65,7 +74,7 @@ class StockOneController {
 
                 Stock.update({unit}, {where: {code, locale}})
 
-                res.json(data)
+                res.json({ok: 'Produto atualizado com sucesso!'})
 
             }).catch(() => {
                 res.json({err: 'Produto não encontrado'})
@@ -73,6 +82,41 @@ class StockOneController {
         }
 
     }
+
+    // Transferencia de mercadoria
+    async transfer(req, res) {
+        const { code } = req.params;
+        const { locale } = req.body;
+        const { unit_exit } = req.body;
+
+        if(code != undefined) { 
+            await Stock.findOne({where: { code, locale }}).then(data => {
+                const unit = parseInt(data.unit) - parseInt(unit_exit)
+
+                Stock.update({unit}, {where: {code, locale}})
+
+                res.json({ok: 'Produto atualizado com sucesso!'})
+            }).catch(() => {
+                res.json({err: 'Produto não encontrado'})
+            })
+        }
+    }
+
+    // Excluindo produto
+    async delete(req, res) {
+        const { id } = req.params;
+
+        if(isNaN(id)) {
+            res.sendStatus(400)
+        } else {
+            await Stock.destroy({where: {id}}).then(data => {
+                res.json({ok: 'Produto deletado com sucesso'})
+            }).catch(() => {
+                res.json({err: 'Erro ao deletar o produto'})
+            })
+        }
+    }
+
 }
 
 module.exports = new StockOneController();
