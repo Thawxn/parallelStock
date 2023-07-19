@@ -117,6 +117,55 @@ class StockOneController {
         }
     }
 
+    // Editando produto
+    async update(req, res) {
+        const { id } = req.params;
+        const {
+            code,
+            title,
+            date,
+            unit,
+            type_product,
+            locale
+        } = req.body;
+
+        if(isNaN(id)){
+            res.sendStatus(400)
+        } else {
+            await Stock.findOne({raw: true, where: {id}}).then(data => {
+                if(data == undefined){
+                    res.sendStatus(404)
+                } else {
+                    if(code != null){
+                        Stock.update({code}, {where: {id}})
+                    }
+
+                    if(title != null){
+                        Stock.update({title}, {where: {id}})
+                    }
+
+                    if(date != null){
+                        Stock.update({date}, {where: {id}})
+                    }
+
+                    if(unit != null){
+                        Stock.update({unit}, {where: {id}})
+                    }
+
+                    if(type_product != null){
+                        Stock.update({type_product}, {where: {id}})
+                    }
+
+                    if(locale != null){
+                        Stock.update({locale}, {where: {id}})
+                    }
+
+                    res.json({ok: 'Produto atualizado com sucesso!'})
+                }
+            })
+        }
+    }
+
 }
 
 module.exports = new StockOneController();
