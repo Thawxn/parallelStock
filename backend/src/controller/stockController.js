@@ -118,10 +118,10 @@ class StockOneController {
     }
 
     // Editando produto
+    // Troquei ID para CODE.
     async update(req, res) {
-        const { id } = req.params;
+        const { code } = req.params;
         const {
-            code,
             title,
             date,
             unit,
@@ -129,35 +129,35 @@ class StockOneController {
             locale
         } = req.body;
 
-        if(isNaN(id)){
+        if(isNaN(code)){
             res.sendStatus(400)
         } else {
-            await Stock.findOne({raw: true, where: {id}}).then(data => {
+            await Stock.findOne({raw: true, where: {code}}).then(data => {
                 if(data == undefined){
                     res.sendStatus(404)
                 } else {
                     if(code != null){
-                        Stock.update({code}, {where: {id}})
+                        Stock.update({code}, {where: {code}})
                     }
 
                     if(title != null){
-                        Stock.update({title}, {where: {id}})
+                        Stock.update({title}, {where: {code}})
                     }
 
                     if(date != null){
-                        Stock.update({date}, {where: {id}})
+                        Stock.update({date}, {where: {code}})
                     }
 
                     if(unit != null){
-                        Stock.update({unit}, {where: {id}})
+                        Stock.update({unit}, {where: {code}})
                     }
 
                     if(type_product != null){
-                        Stock.update({type_product}, {where: {id}})
+                        Stock.update({type_product}, {where: {code}})
                     }
 
                     if(locale != null){
-                        Stock.update({locale}, {where: {id}})
+                        Stock.update({locale}, {where: {code}})
                     }
 
                     res.json({ok: 'Produto atualizado com sucesso!'})

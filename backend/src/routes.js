@@ -12,6 +12,6 @@ routes.post('/estoque/registro', StockController.proRegister);                  
 routes.put('/estoque/atualizacao/:code', StockController.entry);                // atualização de produto em estoque
 routes.put('/estoque/saida/:code', StockController.transfer);                   // transferencia de mercadoria
 routes.delete('/estoque/delete/:id', StockController.delete);                   // deletando produto
-routes.put('/estoque/edit/:id', StockController.update);                        // Editando informações do produto
+routes.put('/estoque/edit/:code', StockController.update);                        // Editando informações do produto
 
 module.exports = routes
