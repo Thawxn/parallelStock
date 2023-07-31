@@ -33,6 +33,7 @@ td {
   border-bottom: 1px solid #ccc; /* Borda cinza */
   border-bottom: 1px solid #ccc; /* Borda cinza */
   width: 100px; /* Largura fixa das células */
+  height: 20px;
 }
 
 th {
@@ -60,7 +61,7 @@ th {
   display: block;
   width: 100%;
   position:relative;
-  max-height: 400px; /* Altura máxima do tbody */
+  max-height: 600px; /* Altura máxima do tbody */
   overflow-y: auto; /* Adiciona barra de rolagem vertical quando o conteúdo excede a altura máxima */
 }
 
@@ -73,6 +74,13 @@ input[type="text"] {
 }
 
 .searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80%;
+}
+
+.homebuttons {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

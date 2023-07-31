@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AddProduct.css';
 
-const AddProduct = ({ onAdd }) => {
+const AddProduct = () => {
+  const history = useNavigate();
   const [productData, setProductData] = useState({
     code: '',
     title: '',
@@ -22,7 +24,7 @@ const AddProduct = ({ onAdd }) => {
     axios.post('http://localhost:8080/estoque/registro', productData)
   .then((response) => {
     console.log('Resposta da API:', response.data);
-    onAdd();
+    history('/');
   })
   .catch((error) => {
     console.error('Erro ao adicionar produto:', error);

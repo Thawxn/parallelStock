@@ -1,0 +1,13 @@
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+form {
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}

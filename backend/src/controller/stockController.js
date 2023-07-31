@@ -4,10 +4,10 @@ class StockOneController {
 
     // Buscando produto
     async search(req, res) {
-        const { code } = req.params;
+        const { id } = req.params;
 
-        if(code !== undefined) {
-            await Stock.findAll({where: {code}}).then(data => {
+        if(id !== undefined) {
+            await Stock.findAll({where: {id}}).then(data => {
                 res.json(data)
             }).catch(() => {
                 res.json({err: 'Produto não encontrado'})
@@ -64,9 +64,7 @@ class StockOneController {
 
     // Entrada de produto
     async entry(req, res) {
-        const { code } = req.params;
-        const { locale } = req.body;
-        const { unit_entry } = req.body;
+        const { locale, unit_entry, code } = req.body;
 
         if(code !== undefined){
             await Stock.findOne({where: {code, locale}}).then(data => {
@@ -85,9 +83,7 @@ class StockOneController {
 
     // Transferencia de mercadoria
     async transfer(req, res) {
-        const { code } = req.params;
-        const { locale } = req.body;
-        const { unit_exit } = req.body;
+        const { locale, unit_exit, code } = req.body;
 
         if(code != undefined) { 
             await Stock.findOne({where: { code, locale }}).then(data => {
@@ -120,8 +116,9 @@ class StockOneController {
     // Editando produto
     // Troquei ID para CODE.
     async update(req, res) {
-        const { code } = req.params;
+        const { id } = req.params;
         const {
+            code,
             title,
             date,
             unit,
@@ -129,35 +126,35 @@ class StockOneController {
             locale
         } = req.body;
 
-        if(isNaN(code)){
+        if(isNaN(id)){
             res.sendStatus(400)
         } else {
-            await Stock.findOne({raw: true, where: {code}}).then(data => {
+            await Stock.findOne({raw: true, where: {id}}).then(data => {
                 if(data == undefined){
                     res.sendStatus(404)
                 } else {
-                    if(code != null){
-                        Stock.update({code}, {where: {code}})
+                    if(id != null){
+                        Stock.update({code}, {where: {id}})
                     }
 
                     if(title != null){
-                        Stock.update({title}, {where: {code}})
+                        Stock.update({title}, {where: {id}})
                     }
 
                     if(date != null){
-                        Stock.update({date}, {where: {code}})
+                        Stock.update({date}, {where: {id}})
                     }
 
                     if(unit != null){
-                        Stock.update({unit}, {where: {code}})
+                        Stock.update({unit}, {where: {id}})
                     }
 
                     if(type_product != null){
-                        Stock.update({type_product}, {where: {code}})
+                        Stock.update({type_product}, {where: {id}})
                     }
 
                     if(locale != null){
-                        Stock.update({locale}, {where: {code}})
+                        Stock.update({locale}, {where: {id}})
                     }
 
                     res.json({ok: 'Produto atualizado com sucesso!'})

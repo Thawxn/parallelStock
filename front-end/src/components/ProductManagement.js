@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './ProductManagement.css';
-import AddProduct from './AddProduct';
 
 const ProductManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -95,8 +94,19 @@ const ProductManagement = () => {
           </tbody>
         </table>
         </div>
-        </div>
-      <AddProduct onAdd={fetchProducts} />
+      </div>
+      <br></br>
+      <div className='homebuttons'>
+        <Link to={`/adicionar`}>
+          <button>Adicionar produto</button>
+        </Link>
+        <Link to={`/entrada`}>
+            <button>Entrada de Produto</button>
+        </Link>
+        <Link to={`/saida`}>
+          <button>Saida de Produto</button>
+        </Link>
+      </div>
     </div>
   );
 };

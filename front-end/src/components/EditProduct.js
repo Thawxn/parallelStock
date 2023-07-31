@@ -10,9 +10,9 @@ const EditProduct = () => {
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const fetchProductDetails = async (productId) => {
+    const fetchProductDetails = async (id) => {
       try {
-        const response = await axios.get(`http://localhost:8080/estoque/${productId}`);
+        const response = await axios.get(`http://localhost:8080/estoque/${id}`);
         const { code, title, date, unit, type_product, locale } = response.data[0]
         setProduct({ code, title, date, unit, type_product, locale });
       } catch (error) {
