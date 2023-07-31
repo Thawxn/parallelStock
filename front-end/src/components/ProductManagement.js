@@ -62,10 +62,11 @@ const ProductManagement = () => {
               <th>Codigo</th>
               <th>Nome</th>
               <th>Data</th>
-              <th>Quantidade</th>
+              <th>Quant</th>
               <th>Tipo</th>
               <th>Local</th>
-              <th> editar | excluir </th>
+              <th>editar</th>
+              <th>excluir</th>
             </tr>
           </thead>
           </table>
@@ -81,11 +82,12 @@ const ProductManagement = () => {
                 <td>{product.type_product}</td>
                 <td>{product.locale}</td>
                 <td>
-                  <Link to={`/editar/${product.code}`}>
+                  <Link to={`/editar/${product.id}`}>
                     <button>Editar</button>
                   </Link>
-                    {' | '}
-                  <Link to={`/deletar/${product.code}`}>
+                </td>
+                <td>
+                  <Link to={`/deletar/${product.id}`}>
                     <button>Excluir</button>
                   </Link>
                 </td>

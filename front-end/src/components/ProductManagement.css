@@ -32,13 +32,13 @@ td {
   text-align: center;
   border-bottom: 1px solid #ccc; /* Borda cinza */
   border-bottom: 1px solid #ccc; /* Borda cinza */
-  width: 100px; /* Largura fixa das células */
+  width: 70px; /* Largura fixa das células */
   height: 20px;
 }
 
 th {
   background-color: #f9f9f9; /* Tom de cinza claro */
-  width: 100px;
+  width: 30px;
 }
 
 /* Estilo dos itens da tabela */
