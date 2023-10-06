@@ -4,10 +4,10 @@ class StockOneController {
 
     // Buscando produto
     async search(req, res) {
-        const { code } = req.params;
+        const { id } = req.params;
 
-        if(code !== undefined) {
-            await Stock.findAll({where: {code}}).then(data => {
+        if(id !== undefined) {
+            await Stock.findAll({where: {id}}).then(data => {
                 res.json(data)
             }).catch(() => {
                 res.json({err: 'Produto não encontrado'})
@@ -64,9 +64,7 @@ class StockOneController {
 
     // Entrada de produto
     async entry(req, res) {
-        const { code } = req.params;
-        const { locale } = req.body;
-        const { unit_entry } = req.body;
+        const { locale, unit_entry, code } = req.body;
 
         if(code !== undefined){
             await Stock.findOne({where: {code, locale}}).then(data => {
@@ -85,9 +83,7 @@ class StockOneController {
 
     // Transferencia de mercadoria
     async transfer(req, res) {
-        const { code } = req.params;
-        const { locale } = req.body;
-        const { unit_exit } = req.body;
+        const { locale, unit_exit, code } = req.body;
 
         if(code != undefined) { 
             await Stock.findOne({where: { code, locale }}).then(data => {
@@ -118,6 +114,7 @@ class StockOneController {
     }
 
     // Editando produto
+    // Troquei ID para CODE.
     async update(req, res) {
         const { id } = req.params;
         const {
@@ -136,7 +133,7 @@ class StockOneController {
                 if(data == undefined){
                     res.sendStatus(404)
                 } else {
-                    if(code != null){
+                    if(id != null){
                         Stock.update({code}, {where: {id}})
                     }
 

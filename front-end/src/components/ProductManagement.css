@@ -1,0 +1,88 @@
+/* Estilo do container principal */
+.ProductManagement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #f1f1f1; /* Tom de cinza claro */
+}
+
+/* Estilo da tabela */
+.tableWrapper {
+  width: 90%;
+  margin-top: 10px;
+  display: table;
+  table-layout: fixed;
+  margin-left: 10%; /* Centraliza horizontalmente a tabela */
+  margin-right: auto; /* Centraliza horizontalmente a tabela */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc; /* Borda cinza */
+  background-color: #fff; /* Tom de cinza claro */
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc; /* Borda cinza */
+  border-bottom: 1px solid #ccc; /* Borda cinza */
+  width: 70px; /* Largura fixa das células */
+  height: 20px;
+}
+
+th {
+  background-color: #f9f9f9; /* Tom de cinza claro */
+  width: 30px;
+}
+
+/* Estilo dos itens da tabela */
+.tableBody tr:nth-child(even) {
+  background-color: #ffffff8a; /* Tom de cinza claro para as linhas pares */
+}
+
+.tableBody tr:nth-child(odd) {
+  background-color: #ddddddcc; /* Tom de cinza mais escuro para as linhas ímpares */
+}
+
+/* Estilo do cabeçalho fixo */
+.tableWrapper thead {
+  position: sticky; /* Cabeçalho fixo */
+  top: 0; /* Fixa o cabeçalho no topo do elemento pai */
+}
+
+/* Estilo do corpo da tabela com barra de rolagem */
+.tableBody {
+  display: block;
+  width: 100%;
+  position:relative;
+  max-height: 600px; /* Altura máxima do tbody */
+  overflow-y: auto; /* Adiciona barra de rolagem vertical quando o conteúdo excede a altura máxima */
+}
+
+/* Estilo do campo de pesquisa */
+input[type="text"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Borda cinza */
+  width: 95%;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80%;
+}
+
+.homebuttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80%;
+}
